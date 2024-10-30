@@ -1,0 +1,77 @@
+/* Navbar.css */
+
+.navbar {
+  background-color: #2E2E2E; /* Tailwind color bg-blue-500 */
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo-icon {
+  height: 60px;
+  width: auto;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo-text {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+  font-weight: 600;
+}
+
+.navbar-link {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-link:hover {
+  color: #d1d5db; /* Tailwind color hover:text-gray-300 */
+}
+
+.search-container {
+  position: relative;
+  color: #4b5563; /* Tailwind color text-gray-600 */
+}
+
+.search-input {
+  background-color: white;
+  height: 2.5rem;
+  padding: 0 2.5rem 0 1rem;
+  border-radius: 9999px; /* Tailwind rounded-full */
+  font-size: 0.875rem; /* Tailwind text-sm */
+  outline: none;
+}
+
+.search-button {
+  position: absolute;
+  right: 1rem;
+  top: 0.625rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.search-icon {
+  height: 1rem;
+  width: 1rem;
+  fill: #6b7280; /* Tailwind color text-gray-500 */
+}

@@ -1,0 +1,47 @@
+.signUp {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../assets/SignUpBG.png);
+    background-size: cover;
+}
+
+.signUpCont {
+    width: 1000px;
+    height: 650px;
+    display: flex;
+    background-color: transparent;
+    position: relative;
+    align-items: center;
+}
+
+.logoCont {
+    width: 600px;
+    height: 100%;
+    background: linear-gradient(218deg, #5A5A5A -12.21%, #2E2E2E 118.72%);
+    position: relative;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SignUpForm {
+    width: 500px;
+    height: 550px;
+    background-color: #d2d2d2;
+    position: absolute;
+    right: 0px;
+    z-index: 1;
+    border-radius: 10px;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+}
+
+.LogoIcon{
+    height: 400px;
+}
