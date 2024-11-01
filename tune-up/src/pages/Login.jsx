@@ -1,48 +1,106 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { auth, db } from '../config/firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+
+import '../css/User.css';
+import logo from '../assets/SignUpLogo.svg';
 
 function Login() {
+  const navigate = useNavigate();
+  const [signInWithEmailAndPassword, user] = useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle, gUser] = useSignInWithGoogle(auth);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    console.log(email, password);
+    signInWithEmailAndPassword(email, password);
+  };
+
+  // Function to save Google user to Firestore if new
+  const saveGoogleUserToFirestore = async (gUser) => {
+    if (gUser) {
+      const userRef = doc(db, "users", gUser.user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {  // Only save if user doesn't already exist
+        await setDoc(userRef, {
+          userId: gUser.user.uid,
+          username: gUser.user.displayName,
+          email: gUser.user.email,
+          createdAt: new Date(),
+        });
+        console.log("New Google user saved to Firestore");
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+    if (gUser) {
+      saveGoogleUserToFirestore(gUser);  // Save Google user if new
+      navigate("/");
+    }
+  }, [user, gUser, navigate]);
+
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white shadow-lg rounded-lg">
-        <h2 className="text-2xl font-bold text-center text-gray-800">Log In</h2>
-        
-        <form className="space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Enter your email"
-            />
+    <div className="LogIn">
+      <div className="logInCont">
+        <form className="LogInForm" noValidate onSubmit={handleSubmit}>
+          <h2 className="text-2xl font-bold text-center text-gray-800">Log In</h2>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="Enter your email"
+                autoComplete="email"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="Enter your password"
+                autoComplete="current-password"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              Login
+            </button>
+            <button
+              type="button" // Change to button to prevent form submission
+              onClick={() => signInWithGoogle()}
+              className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              Login with Google
+            </button>
           </div>
-
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Enter your password"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          >
-            Log In
-          </button>
+          <p className="text-sm text-center text-gray-600">
+            Don't have an account? <a href="/signup" className="text-blue-500 hover:underline">Sign up</a>
+          </p>
         </form>
-        
-        <p className="text-sm text-center text-gray-600">
-          Don't have an account? <a href="/signup" className="text-blue-500 hover:underline">Sign up</a>
-        </p>
+        <div className="logInLogoCont">
+          <img src={logo} alt="Tune Up Logo" className="LogoIcon" />
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

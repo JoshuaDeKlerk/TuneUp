@@ -14,6 +14,7 @@ function Home() {
         </div>
       </section>
 
+
       {/* Featured Tracks Section */}
       <section className="container mx-auto py-12 px-6">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Featured Tracks</h2>
