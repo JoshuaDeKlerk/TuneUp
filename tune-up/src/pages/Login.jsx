@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { auth, db } from '../config/firebase';
@@ -9,16 +9,47 @@ import logo from '../assets/SignUpLogo.svg';
 
 function Login() {
   const navigate = useNavigate();
-  const [signInWithEmailAndPassword, user] = useSignInWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle, gUser] = useSignInWithGoogle(auth);
+
+  // State to store validation error messages
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [generalError, setGeneralError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    console.log(email, password);
-    signInWithEmailAndPassword(email, password);
+    // Reset error messages
+    setEmailError('');
+    setPasswordError('');
+    setGeneralError('');
+
+    // Basic email validation
+    if (!email.includes('@')) {
+      setEmailError('Please enter a valid email address.');
+      return;
+    }
+
+    // Password length validation
+    if (password.length < 6) {
+      setPasswordError('Password must be at least 6 characters long.');
+      return;
+    }
+
+    // If validations pass, attempt to sign in
+    signInWithEmailAndPassword(email, password).catch((err) => {
+      // Handle specific Firebase Authentication error codes
+      if (err.code === 'auth/user-not-found') {
+        setEmailError('Email does not exist.');
+      } else if (err.code === 'auth/wrong-password') {
+        setPasswordError('Incorrect password. Please try again.');
+      } else {
+        setGeneralError('An error occurred. Please try again.');
+      }
+    });
   };
 
   // Function to save Google user to Firestore if new
@@ -65,6 +96,7 @@ function Login() {
                 placeholder="Enter your email"
                 autoComplete="email"
               />
+              {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
             </div>
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
@@ -76,6 +108,7 @@ function Login() {
                 placeholder="Enter your password"
                 autoComplete="current-password"
               />
+              {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
             </div>
             <button
               type="submit"
@@ -84,13 +117,14 @@ function Login() {
               Login
             </button>
             <button
-              type="button" // Change to button to prevent form submission
+              type="button" // Prevent form submission when clicking Google button
               onClick={() => signInWithGoogle()}
               className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               Login with Google
             </button>
           </div>
+          {generalError && <p className="text-red-500 text-center mt-4">{generalError}</p>}
           <p className="text-sm text-center text-gray-600">
             Don't have an account? <a href="/signup" className="text-blue-500 hover:underline">Sign up</a>
           </p>

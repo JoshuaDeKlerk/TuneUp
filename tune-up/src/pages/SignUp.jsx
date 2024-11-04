@@ -1,16 +1,21 @@
-import React from 'react';
+// SignUp.jsx
+import React, { useState, useEffect } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth, db } from "../config/firebase";
-import { doc, setDoc } from "firebase/firestore";
-import { useEffect } from "react";
+import { doc, setDoc, getDocs, collection, query, where } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 import '../css/User.css';
 import logo from '../assets/SignUpLogo.svg';
+import LoadingScreen from '../components/loadingScreen';
 
 function SignUp() {
   const navigate = useNavigate();
   const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [generalError, setGeneralError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,16 +23,41 @@ function SignUp() {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+    // Reset error messages
+    setEmailError('');
+    setPasswordError('');
+    setGeneralError('');
+
+    // Validate form fields
+    if (!email.includes('@')) {
+      setEmailError('Please enter a valid email address.');
+      return;
+    }
+    if (password.length < 6) {
+      setPasswordError('Password must be at least 6 characters long.');
+      return;
+    }
+
+    // Check if email already exists in Firestore
+    const emailQuery = query(collection(db, "users"), where("email", "==", email));
+    const querySnapshot = await getDocs(emailQuery);
+
+    if (!querySnapshot.empty) {
+      setEmailError('This email is already associated with an account.');
+      return;
+    }
+
+    // Proceed to create user in Firebase Authentication
     try {
       const userCredential = await createUserWithEmailAndPassword(email, password);
 
       if (userCredential && userCredential.user) {
         const userId = userCredential.user.uid;
 
-        // Optional: reload user to avoid lookup error
-        await userCredential.user.reload();
+        // Navigate immediately after user creation
+        navigate("/");
 
-        // Save user info to Firestore
+        // Save user info to Firestore in the background
         await setDoc(doc(db, "users", userId), {
           userId: userId,
           username: username,
@@ -36,19 +66,25 @@ function SignUp() {
         });
 
         console.log("User registered and saved to Firestore with userId");
-      } else {
-        console.error("User creation failed, userCredential is undefined");
       }
     } catch (err) {
+      if (err.code === 'auth/email-already-in-use') {
+        setEmailError('This email is already associated with an account.');
+      } else if (err.code === 'auth/invalid-email') {
+        setEmailError('Please enter a valid email address.');
+      } else if (err.code === 'auth/weak-password') {
+        setPasswordError('Password must be at least 6 characters long.');
+      } else {
+        setGeneralError('An error occurred. Please try again.');
+      }
       console.error("Error creating user:", err);
     }
   };
 
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user, navigate]);
+  // Show loading screen while user creation is in progress
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="signUp">
@@ -86,6 +122,7 @@ function SignUp() {
                 placeholder="Enter your email"
                 autoComplete="email"
               />
+              {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
             </div>
 
             <div>
@@ -100,6 +137,7 @@ function SignUp() {
                 placeholder="Enter your password"
                 autoComplete="current-password"
               />
+              {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
             </div>
 
             <button
@@ -109,15 +147,14 @@ function SignUp() {
               Sign Up
             </button>
           </div>
-          <p className="text-sm text-center text-gray-600">
+          {generalError && <p className="text-red-500 text-center mt-4">{generalError}</p>}
+          <p className="text-sm text-center text-gray-600 mt-4">
             Already have an account?{' '}
             <a href="/login" className="text-blue-500 hover:underline">
               Log in
             </a>
           </p>
         </form>
-
-        {error && <p className="text-red-500 text-center">{error.message}</p>}
       </div>
     </div>
   );

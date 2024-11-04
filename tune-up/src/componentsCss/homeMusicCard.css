@@ -1,0 +1,70 @@
+.musicCard {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    position: relative;
+    cursor: pointer;
+}
+
+.image {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 30px;
+}
+
+.imageMusicCard {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.playButton {
+    width: 75px;
+    height: 75px;
+}
+
+.musicCard:hover .overlay {
+    opacity: 1; /* Show overlay on hover */
+}
+
+.musicCard:hover .imageMusicCard {
+    transform: scale(1.05); /* Slightly scale the image on hover */
+}
+
+.text h1 {
+    color: #000;
+    text-align: left;
+    font-family: "Alata", sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 10px 0 0;
+}
+
+.text h2 {
+    color: #000;
+    text-align: left;
+    font-family: "Alatsi", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+}

@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Alatsi&display=swap');
+
+.heroSection{
+    height: 90vh;
+    background-image: url(../assets/HomeBg.png);
+    background-size: cover;
+    display: flex;
+}
+
+.heroLeft{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.heroLeft h1{
+    color: #FFF;
+    text-align: center;
+    font-family: "Alata", sans-serif;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.heroLeft h1 b{
+    color: #0FF;
+    text-align: center;
+    font-family: "Alata", sans-serif;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.heroLeft p{
+    color: #FFF;
+    text-align: center;
+    font-family: "Alatsi", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 35vw;
+}
+
+.heroLeft a{
+    display: flex;
+    padding: 15px 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background: #0FF;
+    color: #262626;
+    text-align: center;
+    font-family: "Alatsi", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.heroLeft a:hover{
+    background: #FFF;
+    color: #262626;
+}
+
+.heroRight{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heroLogo{
+    height: 70vh;
+    animation: bounce 4s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.featured{
+    padding: 20px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.featured h1{
+    color: #000;
+    font-family: "Alata", sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.topRated{
+    width: 100%;
+}
+
+.topRated h2{
+    color: #000;
+    font-family: "Alatsi", sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
