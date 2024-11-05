@@ -1,5 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FaPlay, FaPause, FaStepForward, FaStepBackward, FaHeart, FaVolumeUp, FaVolumeMute, FaExpand, FaCompress } from 'react-icons/fa';
+import {
+  FaPlay,
+  FaPause,
+  FaStepForward,
+  FaStepBackward,
+  FaHeart,
+  FaVolumeUp,
+  FaVolumeMute,
+  FaExpand,
+  FaCompress
+} from 'react-icons/fa';
 import '../componentsCss/musicPlayer.css';
 
 function MusicPlayer({ track, tracks, setCurrentTrack }) {
@@ -12,19 +22,20 @@ function MusicPlayer({ track, tracks, setCurrentTrack }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const audioRef = useRef(null);
 
+  // Helper to get the current index of the track
+  const currentIndex = tracks.findIndex((t) => t.id === track?.id);
+
   const handleNextTrack = () => {
-    if (tracks.length > 0) {
-      const currentIndex = tracks.findIndex(t => t.id === track?.id);
-      const nextTrack = tracks[(currentIndex + 1) % tracks.length];
-      setCurrentTrack(nextTrack);
+    if (tracks.length > 0 && currentIndex !== -1) {
+      const nextIndex = (currentIndex + 1) % tracks.length;
+      setCurrentTrack(tracks[nextIndex]);
     }
   };
 
   const handlePreviousTrack = () => {
-    if (tracks.length > 0) {
-      const currentIndex = tracks.findIndex(t => t.id === track?.id);
-      const previousTrack = tracks[(currentIndex - 1 + tracks.length) % tracks.length];
-      setCurrentTrack(previousTrack);
+    if (tracks.length > 0 && currentIndex !== -1) {
+      const previousIndex = (currentIndex - 1 + tracks.length) % tracks.length;
+      setCurrentTrack(tracks[previousIndex]);
     }
   };
 
@@ -85,17 +96,20 @@ function MusicPlayer({ track, tracks, setCurrentTrack }) {
     <div className={`music-player ${isFullscreen ? 'fullscreen' : ''}`}>
       <audio ref={audioRef} />
 
-      <div className="cover-art">
-        {track?.coverArtUrl ? (
-          <img src={track.coverArtUrl} alt="Cover Art" className="cover-art-image" />
-        ) : (
-          <div className="cover-art-placeholder"></div>
-        )}
-      </div>
+      {/* Cover art and track details for fullscreen mode */}
+      <div className="left-section">
+        <div className="cover-art">
+          {track?.coverArtUrl ? (
+            <img src={track.coverArtUrl} alt="Cover Art" className="cover-art-image" />
+          ) : (
+            <div className="cover-art-placeholder"></div>
+          )}
+        </div>
 
-      <div className="track-details">
-        <span className="track-title">{track?.title || 'No Track Selected'}</span>
-        <span className="track-artist">{track?.artist || 'Unknown Artist'}</span>
+        <div className="track-details">
+          <span className="track-title">{track?.title || 'No Track Selected'}</span>
+          <span className="track-artist">{track?.artist || 'Unknown Artist'}</span>
+        </div>
       </div>
 
       <FaHeart
@@ -146,11 +160,13 @@ function MusicPlayer({ track, tracks, setCurrentTrack }) {
           onChange={handleVolumeChange}
           className="volume-slider"
         />
-        {isFullscreen ? (
-          <FaCompress onClick={toggleFullscreen} className="fullscreen-icon" />
-        ) : (
-          <FaExpand onClick={toggleFullscreen} className="fullscreen-icon" />
-        )}
+        <div className="fullscreenCont">
+          {isFullscreen ? (
+            <FaCompress onClick={toggleFullscreen} className="fullscreen-icon" />
+          ) : (
+            <FaExpand onClick={toggleFullscreen} className="fullscreen-icon" />
+          )}
+        </div>
       </div>
     </div>
   );
