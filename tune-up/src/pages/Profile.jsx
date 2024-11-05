@@ -1,11 +1,11 @@
 import React from 'react';
 import { auth, db } from '../config/firebase';
 import { doc, deleteDoc } from 'firebase/firestore';
+import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 function Profile() {
   const navigate = useNavigate();
-
   const user = auth.currentUser;
 
   const handleDeleteUser = async () => {
@@ -27,6 +27,16 @@ function Profile() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+      alert('Failed to sign out.');
+    }
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen p-6">
       <div className="container mx-auto max-w-2xl bg-white p-6 rounded-lg shadow-lg">
@@ -41,6 +51,14 @@ function Profile() {
           <h2 className="text-2xl font-semibold text-gray-700 mb-4">Your Tracks</h2>
           {/* Your tracks list here */}
         </div>
+
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+        >
+          Logout
+        </button>
 
         {/* Delete User Button */}
         <button

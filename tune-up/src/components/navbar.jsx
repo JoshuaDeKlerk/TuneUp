@@ -35,21 +35,6 @@ function Navbar() {
           <li><Link to="/profile" className="navbar-link">Profile</Link></li>
           {!user && <li><Link to="/login" className="navbar-link">Login</Link></li>}
         </ul>
-
-        <div className="search-container">
-          <input
-            type="text"
-            value={search}
-            onChange={handleSearchChange}
-            placeholder="Search..."
-            className="search-input"
-          />
-          <button type="submit" className="search-button">
-            <svg className="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M12.9 14.32l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387a8 8 0 111.414-1.414zm-6.9-5.32a6 6 0 1112 0 6 6 0 01-12 0z"/>
-            </svg>
-          </button>
-        </div>
       </div>
     </nav>
   );

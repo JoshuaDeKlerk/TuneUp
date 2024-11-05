@@ -34,9 +34,14 @@
     transition: opacity 0.3s ease-in-out;
 }
 
-.playButton {
+.home-overlay .playButton {
     width: 75px;
     height: 75px;
+    object-fit: contain;
+}
+
+.musicCard:hover .home-overlay {
+    opacity: 1; /* Show overlay on hover */
 }
 
 .musicCard:hover .overlay {

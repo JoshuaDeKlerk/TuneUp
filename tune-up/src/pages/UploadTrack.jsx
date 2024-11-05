@@ -3,6 +3,7 @@ import { db, storage, auth } from '../config/firebase';
 import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import imageCompression from 'browser-image-compression';
 
 function UploadTrack() {
   const [title, setTitle] = useState('');
@@ -13,30 +14,41 @@ function UploadTrack() {
   const [userId, setUserId] = useState('');
   const [artist, setArtist] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    // Fetch user details once authenticated
     const fetchUserDetails = async () => {
       if (user) {
         const userRef = doc(db, 'users', user.uid);
         const userSnap = await getDoc(userRef);
         if (userSnap.exists()) {
           setUserId(user.uid);
-          setArtist(userSnap.data().username); // Set artist as the username from users collection
+          setArtist(userSnap.data().username);
         }
       }
     };
     fetchUserDetails();
   }, [user]);
 
+  const handleImageCompression = async (file) => {
+    const options = {
+      maxSizeMB: 0.2,
+      maxWidthOrHeight: 500,
+      useWebWorker: true,
+    };
+    try {
+      const compressedFile = await imageCompression(file, options);
+      setCoverArt(compressedFile);
+    } catch (error) {
+      console.error("Image compression error:", error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Upload cover art and get URL
       let coverArtUrl = '';
       if (coverArt) {
         const coverArtRef = ref(storage, `coverArt/${coverArt.name}`);
@@ -44,7 +56,6 @@ function UploadTrack() {
         coverArtUrl = await getDownloadURL(coverArtRef);
       }
 
-      // Upload audio file and get URL
       let audioUrl = '';
       if (audioFile) {
         const audioRef = ref(storage, `audio/${audioFile.name}`);
@@ -52,7 +63,6 @@ function UploadTrack() {
         audioUrl = await getDownloadURL(audioRef);
       }
 
-      // Save metadata and file URLs to Firestore
       await addDoc(collection(db, 'tracks'), {
         title,
         genre,
@@ -61,10 +71,9 @@ function UploadTrack() {
         audioUrl,
         userId,
         artist,
-        createdAt: new Date()
+        createdAt: new Date(),
       });
 
-      // Reset the form fields
       setTitle('');
       setGenre('');
       setDescription('');
@@ -123,7 +132,7 @@ function UploadTrack() {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => setCoverArt(e.target.files[0])}
+              onChange={(e) => handleImageCompression(e.target.files[0])}
               required
             />
           </div>

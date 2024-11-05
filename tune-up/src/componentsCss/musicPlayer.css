@@ -1,0 +1,239 @@
+.music-player {
+  position: fixed;
+  height: 100px;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 1000;
+  border-radius: 20px 20px 0 0;
+  background: rgba(38, 38, 38, 0.60);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9.3px);
+  -webkit-backdrop-filter: blur(9.3px);
+  border: 1px solid rgba(38, 38, 38, 0.65);
+}
+
+.cover-art {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.cover-art-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.track-details {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.track-title {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.track-artist {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.favorite-icon {
+  font-size: 1.5rem;
+  color: #ddd;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.favorite-icon.favorite {
+  color: red;
+}
+
+.controls-time-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  gap: 10px;
+}
+
+.centered-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-icon {
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.time-info {
+  display: flex;
+  align-items: center;
+  width: 600px;
+  margin-top: 5px;
+}
+
+.seek-bar {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 10px;
+}
+
+.seek-bar,
+.volume-slider {
+  -webkit-appearance: none; /* Remove default styling for Webkit */
+  appearance: none; /* Remove default styling for other browsers */
+  width: 100%;
+  height: 4px;
+  border-radius: 5px;
+  background: #262626; /* Background track color */
+  outline: none;
+  margin: 0 10px;
+}
+
+/* Track background in WebKit browsers (Chrome, Safari) */
+.seek-bar::-webkit-slider-runnable-track,
+.volume-slider::-webkit-slider-runnable-track {
+  background-color: #dbdbdb; /* Track background color */
+  height: 4px;
+  border-radius: 5px;
+}
+
+/* Thumb in WebKit browsers */
+.seek-bar::-webkit-slider-thumb,
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background-color: #00FFFF; /* Progress color */
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -4.5px; /* Center thumb vertically */
+}
+
+/* Progress color in Firefox */
+.seek-bar::-moz-range-progress,
+.volume-slider::-moz-range-progress {
+  background-color: #00FFFF;
+}
+
+/* Track background in Firefox */
+.seek-bar::-moz-range-track,
+.volume-slider::-moz-range-track {
+  background-color: #262626;
+}
+
+/* Progress color in IE/Edge */
+.seek-bar::-ms-fill-lower,
+.volume-slider::-ms-fill-lower {
+  background-color: #00FFFF;
+}
+
+/* Track background in IE/Edge */
+.seek-bar::-ms-track,
+.volume-slider::-ms-track {
+  background-color: #262626;
+  border-color: transparent;
+  color: transparent;
+  height: 4px;
+  border-radius: 5px;
+}
+
+
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.volume-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.volume-slider {
+  width: 80px;
+  margin-right: 10px;
+}
+
+.fullscreen-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.music-player.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url('path-to-background-image.jpg') center/cover;
+}
+
+.fullscreen .cover-art {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.fullscreen .track-details {
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.fullscreen .track-title {
+  font-weight: bold;
+}
+
+.fullscreen .track-artist {
+  opacity: 0.8;
+}
+
+.fullscreen .centered-controls,
+.fullscreen .time-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.fullscreen .time-info {
+  width: 80%;
+  max-width: 700px;
+  margin-top: 10px;
+}
+
+.fullscreen .volume-control {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+
+.fullscreen .favorite-icon,
+.fullscreen .fullscreen-icon {
+  font-size: 2rem;
+  color: #00FFFF;
+}
