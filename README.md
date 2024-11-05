@@ -97,13 +97,13 @@ firebase deploy
 The idea behind TuneUp is to create a unique space for emerging artists to upload their music and gain recognition, while listeners can explore new sounds and interact with upcoming artists. The platform prioritizes user experience with a minimalist interface that makes it easy to navigate and interact.
 
 ### Register Page
-![Home Page UI Design](./Assets/ReadMe/UI/SignUp.png)
+![Home Page UI Design](./tune-up/assets/Register.png)
 
 ### Login Page
-![Post Page UI Design](./Assets/ReadMe/UI/Login.png)
+![Post Page UI Design](./tune-up/assets/LogIn.png)
 
-### Create a Post Page
-![Create a Post UI Design](./Assets/ReadMe/UI/Home.png)
+### Home
+![Create a Post UI Design](./tune-up/assets/Home.png)
 
 
 ## Development Process
@@ -128,13 +128,13 @@ The idea behind TuneUp is to create a unique space for emerging artists to uploa
 ## Mockups
 
 ### Register Mockup
-![CasaVista Mockup 1](./Assets/ReadMe/MockUps/SignUp.png)
+![CasaVista Mockup 1](./tune-up/assets/RegisterMockup.png)
 
 ### Login Mockup
-![CasaVista Mockup 1](./Assets/ReadMe/MockUps/login.png)
+![CasaVista Mockup 1](./tune-up/assets/LogInMockup.png)
 
 ### Home Mockup
-![CasaVista Mockup 1](./Assets/ReadMe/MockUps/Home.png)
+![CasaVista Mockup 1](./tune-up/assets/HomeMockup.png)
 
 ## Other Resources
 - **Demonstration Video** - [Link To Demonstration Video](https://drive.google.com/drive/folders/1m_tC4c0sFXg-lnwuAZ45O8F0-i4G70YS?usp=drive_link)
