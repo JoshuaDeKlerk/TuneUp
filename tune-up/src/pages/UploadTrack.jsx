@@ -4,6 +4,7 @@ import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import imageCompression from 'browser-image-compression';
+import '../css/UploadTrack.css';
 
 function UploadTrack() {
   const [title, setTitle] = useState('');
@@ -89,8 +90,8 @@ function UploadTrack() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-lg p-8 bg-white shadow-lg rounded-lg">
+    <div className="flex items-center justify-center uploadTrackCont">
+      <div className="w-full max-w-lg p-8 bg-white shadow-lg rounded-lg uploadTrackForm">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Upload New Track</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>

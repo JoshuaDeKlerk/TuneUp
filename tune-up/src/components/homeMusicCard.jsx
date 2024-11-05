@@ -37,12 +37,8 @@ function HomeMusicCard({ track, setCurrentTrack }) {
         </div>
       </div>
       <div className="text">
-        <Link to={`/track/${track.id}`}>
           <h1>{track.title}</h1>
-        </Link>
-        <Link to={`/artist/${track.artist}`}>
           <h2>{track.artist}</h2>
-        </Link>
       </div>
     </div>
   );

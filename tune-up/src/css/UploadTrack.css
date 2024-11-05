@@ -1,0 +1,9 @@
+.uploadTrackCont{
+    background-image: url(../assets/HomeBg.png);
+    height: 90vh;
+}
+
+.uploadTrackForm{
+    position: absolute;
+    top: 12%;
+}

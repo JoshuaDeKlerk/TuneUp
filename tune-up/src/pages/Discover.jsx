@@ -1,19 +1,27 @@
-import React, { useState } from 'react'
+// Discover.js
+import React, { useState, useEffect } from 'react';
+import { db } from '../config/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import HomeMusicCard from '../components/HomeMusicCard';
 
-function Discover() {
-  const [genre, setGenre] = useState('')
+function Discover({ setCurrentTrack, setIsPlaying }) {
+  const [genre, setGenre] = useState('');
+  const [tracks, setTracks] = useState([]);
 
-  // Sample tracks data (for demonstration)
-  const tracks = [
-    { id: 1, title: 'Song One', artist: 'Artist A', genre: 'Pop', rating: 4.5 },
-    { id: 2, title: 'Song Two', artist: 'Artist B', genre: 'Rock', rating: 4.0 },
-    { id: 3, title: 'Song Three', artist: 'Artist C', genre: 'Hip-Hop', rating: 4.7 },
-    { id: 4, title: 'Song Four', artist: 'Artist D', genre: 'EDM', rating: 4.3 },
-    // Add more sample tracks as needed
-  ]
+  // Fetch tracks from Firestore
+  useEffect(() => {
+    const fetchTracks = async () => {
+      const tracksCollection = collection(db, 'tracks');
+      const trackSnapshot = await getDocs(tracksCollection);
+      const trackList = trackSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setTracks(trackList);
+    };
+
+    fetchTracks();
+  }, []);
 
   // Filter tracks by genre if a genre is selected
-  const filteredTracks = genre ? tracks.filter(track => track.genre === genre) : tracks
+  const filteredTracks = genre ? tracks.filter(track => track.genre === genre) : tracks;
 
   return (
     <div className="bg-gray-100 min-h-screen p-6">
@@ -43,17 +51,19 @@ function Discover() {
         {/* Tracks Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredTracks.map(track => (
-            <div key={track.id} className="bg-white p-4 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold mb-1">{track.title}</h3>
-              <p className="text-gray-600 mb-1">Artist: {track.artist}</p>
-              <p className="text-gray-600 mb-1">Genre: {track.genre}</p>
-              <p className="text-yellow-500 font-semibold">Rating: {track.rating} ⭐</p>
-            </div>
+            <HomeMusicCard
+              key={track.id}
+              track={track}
+              setCurrentTrack={(track) => {
+                setCurrentTrack(track);
+                setIsPlaying(true); // Start playing when the track is clicked
+              }}
+            />
           ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Discover
+export default Discover;

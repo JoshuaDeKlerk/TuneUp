@@ -143,3 +143,30 @@
     background-color: rgb(137, 1, 1);
     color: white;
 }
+
+.ProfilePicContainer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.ProfilePicText{
+    color: #FFF;
+    text-align: left;
+    font-family: "Alatsi", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+    margin-top: 10px;
+}
+
+.ProfilePicFormCont{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.FileButton{
+    color: #FFF;
+}

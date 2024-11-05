@@ -45,7 +45,7 @@ function Home({ setCurrentTrack, setTracks }) {
         </div>
       </div>
 
-      <section className="bg-gray-200 py-12">
+      <section className="bg-gray-200 readyToShare ">
         <div className="container mx-auto text-center">
           <h2 className="text-2xl font-bold mb-4">Ready to share your music?</h2>
           <p className="text-gray-700 mb-6">Join our community of creators and listeners today.</p>

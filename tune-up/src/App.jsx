@@ -28,15 +28,23 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home setCurrentTrack={setCurrentTrack} setTracks={setTracks} setIsPlaying={setIsPlaying} />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard setCurrentTrack={setCurrentTrack} setIsPlaying={setIsPlaying} />} />
         <Route path="/upload" element={<UploadTrack />} />
-        <Route path="/discover" element={<Discover />} />
+        <Route path="/discover" element={<Discover setCurrentTrack={setCurrentTrack} setIsPlaying={setIsPlaying} />} />
         <Route path="/track/:id" element={<TrackDetail />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-      {!hideMusicPlayer && <MusicPlayer track={currentTrack} tracks={tracks} setCurrentTrack={setCurrentTrack} isPlaying={isPlaying} setIsPlaying={setIsPlaying} />}
+      {!hideMusicPlayer && (
+        <MusicPlayer
+          track={currentTrack}
+          tracks={tracks}
+          setCurrentTrack={setCurrentTrack}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+        />
+      )}
     </div>
   );
 }
