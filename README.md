@@ -136,8 +136,11 @@ The idea behind TuneUp is to create a unique space for emerging artists to uploa
 ### Home Mockup
 ![CasaVista Mockup 1](./Assets/ReadMe/MockUps/Home.png)
 
-## Demonstration
-[Link To Demonstration Video](https://drive.google.com/drive/folders/1gek3j6g_WJgM0EDlCRWWWeSuR6lbve7C?usp=sharing)
+## Other Resources
+- **Demonstration Video** - [Link To Demonstration Video](https://drive.google.com/drive/folders/1m_tC4c0sFXg-lnwuAZ45O8F0-i4G70YS?usp=drive_link)
+- **Open Brief proposal** - [Link To Document](https://docs.google.com/document/d/1Z9u30rvw_OsQqcAf7lOFD0SmyR_O8vRFqhsPCvQg1Fc/edit?usp=sharing)
+- **Milestone Check Document** - [Link To Document](https://docs.google.com/document/d/1CQG45TnFPoYjGDCC_h9VJs02m_N43LY3K8i97HZn4Qk/edit?usp=sharing)
+
 
 ### License
 [MIT](LICENSE) © Joshua De Klerk
