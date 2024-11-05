@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Alatsi&display=swap');
+
+.profileCont{
+    height: 90vh;
+    width: 100%;
+    background-image: url(../assets/HomeBg.png);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+
+.ProfileFromCont{
+    width: 800px;
+    height: 500px;
+    background: rgba(38, 38, 38, 0.60);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.3px);
+    -webkit-backdrop-filter: blur(9.3px);
+    border: 1px solid rgba(213, 213, 213, 0.2);
+    border-radius: 20px;
+    position: absolute;
+    top: 20%;
+    padding: 20px;
+}
+
+.ProfileTitle{
+    color: #FFF;
+    text-align: left;
+    font-family: "Alata", sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.profileDetails{
+    display: flex;
+    gap: 50px;
+    align-items: end;
+    margin-top: 20px;
+}
+
+.ProfilePic{
+    height: 200px;
+    width: 200px;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.userName{
+    color: #FFF;
+    text-align: left;
+    font-family: "Alata", sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.descriptionProfile{
+    color: #FFF;
+    text-align: left;
+    font-family: "Alatsi", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+    margin-top: 10px;
+}
+
+.editDescription{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.descriptionProfileBox{
+    background: none;
+    color: #FFF;
+    text-align: left;
+    font-family: "Alatsi", sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+    margin-top: 10px;
+    width: 500px;
+    display: flex;
+}
+
+.buttonCont{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.SaveButton{
+    padding: 7px 15px;
+    border-radius: 50px;
+}
+
+.save{
+    background-color: #0FF;
+}
+
+.cancel{
+    background-color: #FFF;
+}
+
+.AccountOptionsButtons{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: start;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.LogoutButtons{
+    width: 100px;
+    background-color: #FFF;
+    height: 40px;
+    margin-bottom: 20px;
+    border-radius: 50px;
+}
+
+.logout{
+    background-color: #0FF;
+}
+
+.logout:hover{
+    background-color: rgb(176, 255, 255);
+}
+
+.delete{
+    background-color: red;
+    color: white;
+}
+
+.delete:hover{
+    background-color: rgb(137, 1, 1);
+    color: white;
+}

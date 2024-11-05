@@ -12,7 +12,6 @@ function Login() {
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle, gUser] = useSignInWithGoogle(auth);
 
-  // State to store validation error messages
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [generalError, setGeneralError] = useState('');
@@ -22,26 +21,21 @@ function Login() {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    // Reset error messages
     setEmailError('');
     setPasswordError('');
     setGeneralError('');
 
-    // Basic email validation
     if (!email.includes('@')) {
       setEmailError('Please enter a valid email address.');
       return;
     }
 
-    // Password length validation
     if (password.length < 6) {
       setPasswordError('Password must be at least 6 characters long.');
       return;
     }
 
-    // If validations pass, attempt to sign in
     signInWithEmailAndPassword(email, password).catch((err) => {
-      // Handle specific Firebase Authentication error codes
       if (err.code === 'auth/user-not-found') {
         setEmailError('Email does not exist.');
       } else if (err.code === 'auth/wrong-password') {
@@ -63,6 +57,7 @@ function Login() {
           userId: gUser.user.uid,
           username: gUser.user.displayName,
           email: gUser.user.email,
+          profilePicURL: gUser.user.photoURL,  // Save Google profile picture URL
           createdAt: new Date(),
         });
         console.log("New Google user saved to Firestore");
@@ -117,7 +112,7 @@ function Login() {
               Login
             </button>
             <button
-              type="button" // Prevent form submission when clicking Google button
+              type="button"
               onClick={() => signInWithGoogle()}
               className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
