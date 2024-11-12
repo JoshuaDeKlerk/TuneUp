@@ -2,6 +2,34 @@
 
 - - - -
 
+## Table of Contents
+
+1. [About Tune Up](#about-tune-up)
+2. [Built With](#built-with)
+3. [How To Install](#how-to-install)
+   - [Step 1: Clone the Repository](#step-1-clone-the-repository)
+   - [Step 2: Setting Up the Environment](#step-2-setting-up-the-environment)
+   - [Step 3: Firebase Setup](#step-3-firebase-setup)
+   - [Step 4: Running the Project Locally](#step-4-running-the-project-locally)
+   - [Step 5: Deploying to Firebase Hosting](#step-5-deploying-to-firebase-hosting)
+4. [Features](#features)
+5. [The Idea](#the-idea)
+6. [Development Process](#development-process)
+   - [Highlights](#highlights)
+   - [Challenges](#challenges)
+7. [Future Implementations](#future-implementations)
+8. [Mockups](#mockups)
+   - [Register Mockup](#register-mockup)
+   - [Login Mockup](#login-mockup)
+   - [Home Mockup](#home-mockup)
+9. [Other Resources](#other-resources)
+10. [License](#license)
+11. [Author](#author)
+12. [Contact](#contact)
+13. [Acknowledgements](#acknowledgements)
+
+- - - -
+
 # About Tune Up
 
 TuneUp is a music platform where emerging artists can upload their music, gain feedback, and interact with a community of listeners. Designed with simplicity and functionality in mind, TuneUp allows users to explore fresh sounds and new artists in an engaging way.
